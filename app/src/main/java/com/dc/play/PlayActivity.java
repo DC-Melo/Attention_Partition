@@ -3,6 +3,7 @@ package com.dc.play;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ import com.dc.play.bean.Config;
 import com.dc.play.bean.GameMsg;
 import com.dc.play.bean.Result;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -32,14 +34,17 @@ import java.util.concurrent.TimeUnit;
 public class PlayActivity extends AppCompatActivity {
     private static final String TAG = PlayActivity.class.getSimpleName();
     private GridLayout gridLayout;
+    private boolean isGameRuning;
+    private boolean isGamePause;
     private Config config;
+    private DisplayThread randomThread;
     Button btnPause;
     TextView tipText ;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Result> results = new ArrayList<>();
 
 
-    @SuppressLint("HandlerLeak") private Handler mainHandler = new Handler() {
+private Handler mainHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -47,8 +52,27 @@ public class PlayActivity extends AppCompatActivity {
             int what = msg.what;
             switch (what) {
                 case GameMsg.MSG_GAME_END:
+                    isGameRuning = false;
+                    isGamePause = false;
+                    results = (ArrayList<Result>) msg.obj;
+                    // bundle , 注意:使用putSerializable()方法时，需要把List<>强转成为Serializable,并且集合中的成员都需要实现Serializable接口
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("ARRAYLIST",(Serializable)results);
+                    // intent
+                    Intent intent = new Intent(PlayActivity.this,ResultActivity.class);
+                    intent.putExtras(bundle);
+                    // navigate
+                    startActivity(intent);
                     break;
                 case GameMsg.MSG_GAME_START:
+                    isGameRuning = true;
+                    isGamePause = false;
+                    break;
+                case GameMsg.MSG_GAME_START_RUNING:
+                    isGamePause = false;
+                    break;
+                case GameMsg.MSG_GAME_START_PAUSE:
+                    isGamePause = true;
                     break;
                 case GameMsg.MSG_GAME_TIP:
                     tipText.setVisibility(View.VISIBLE);
@@ -65,7 +89,8 @@ public class PlayActivity extends AppCompatActivity {
                     }
                     break;
                 case GameMsg.MSG_GAME_ACTION:
-                    buttons.get(2).setVisibility(View.VISIBLE);
+                    int index = (int) msg.obj;
+                    buttons.get(index).setVisibility(View.VISIBLE);
                     break;
                 case GameMsg.MSG_GAME_ACTION_BLANK:
                     btnPause.setVisibility(View.INVISIBLE);
@@ -77,36 +102,17 @@ public class PlayActivity extends AppCompatActivity {
             }
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         config = new Config();
-        config.setColumn(16);
-        config.setRow(6);
         initView();
-
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        Future<ArrayList<Result>> resultsFuture = executorService.submit(new CalculationJob(config));
-/*        try {
-            results = resultsFuture.get(100000, TimeUnit.SECONDS);
-            System.out.println("result: " + results.size());
-        } catch (Exception e) {
-            // interrupts if there is any possible error
-            Log.d(TAG, "异常" );
-            resultsFuture.cancel(true);
-        }
-        executorService.shutdown();
-        try {
-            executorService.awaitTermination(10000, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            Log.d(TAG, "异常" );
-            e.printStackTrace();
-        }
-        Log.d(TAG, "结果：" + results.get(0).getBeginTime());*/
+        randomThread = new DisplayThread(this, mainHandler, config);
+        randomThread.start();
     }
 
+    @SuppressLint("ResourceAsColor")
     public void initView(){
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
         gridLayout.setColumnCount(config.getColumn());
@@ -116,13 +122,13 @@ public class PlayActivity extends AppCompatActivity {
 
         btnPause = (Button) findViewById(R.id.btn_pause);
         tipText = (TextView) findViewById(R.id.tip_text);
-
         for(int i=0;i<config.getRow();i++){
             for(int j=0;j<config.getColumn();j++){
                 System.out.println(String.valueOf(i));
                 System.out.println(String.valueOf(j));
                 Button btn = new Button(this);
-                btn.setText(String.format("%d%d",i,j));
+                btn.setText(String.format("%d,%d",i,j));
+                btn.setBackgroundColor(R.color.foreground);
                 //btn.setText(String.format("row=%d cloumn=%d",i,j));
                 buttons.add(btn);
                 GridLayout.Spec rowSpec = GridLayout.spec(i,GridLayout.FILL,1f);
@@ -139,85 +145,31 @@ public class PlayActivity extends AppCompatActivity {
             buttons.get(i).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Do something in response to button click
-                    Toast toast = Toast.makeText(getApplicationContext(), "提示"+String.valueOf(finalI), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "点击位置"+String.valueOf(finalI), Toast.LENGTH_SHORT);
                     toast.show();
+                    randomThread.setActionTime();
                 }
             });
         }
 
-/*        Collections.shuffle(results);
-        for(int i = 0; i< results.size(); i++){
-            int place = results.get(i).getPlace();
-            //buttons.get(place).setVisibility(View.VISIBLE);
-            System.out.println("位置："+String.valueOf(place));
-        }*/
-    }
+        btnPause.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(btnPause.getText().toString().equals(getResources().getString(R.string.thread_pause))){
+                    randomThread.setThreadPause();
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.thread_pause, Toast.LENGTH_SHORT);
+                    toast.show();
+                    btnPause.setText(R.string.thread_resume);
+                }else{
+                    randomThread.setThreadResume();
+                    // Do something in response to button click
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.thread_resume, Toast.LENGTH_SHORT);
+                    toast.show();
+                    btnPause.setText(R.string.thread_pause);
+                }
 
-
-    public static class CalculationJob implements Callable<ArrayList<Result>> {
-        private Handler mainHandler;
-        Config config;
-        ArrayList<Result> results = new ArrayList<>();
-
-        public CalculationJob(Config config) {
-            this.config =config;
-        }
-        @Override
-        public ArrayList<Result> call() throws Exception {
-            //return input + 1;
-            int sleetTime;
-            for(int i=0;i<config.getColumn()* config.getRow();i++){
-                Result result = new Result();
-                result.setPlace(i);
-                results.add(result);
             }
-            Collections.shuffle(results);
-            for(int i=0;i<results.size();i++){
-                results.get(i).setBeginTime(System.currentTimeMillis());
-                Log.d(TAG, String.format("序号：%d,位置:%d,启示时间：%d",i,results.get(i).getPlace(),results.get(i).getBeginTime()));
+        });
 
-                sleetTime = new Random().nextInt(config.getTipTimeFloat()) +config.getTipTimeConst();
-                try {
-                    Thread.sleep(sleetTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-                results.get(i).setTipTime(System.currentTimeMillis());
-                Log.d(TAG, String.format("序号：%d,位置:%d,提示时间：%d",i,results.get(i).getPlace(),results.get(i).getTipTime()));
-
-                sleetTime = new Random().nextInt(config.getTipBlankTimeFloat()) +config.getTipBlankTimeConst();
-                try {
-                    Thread.sleep(sleetTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-                results.get(i).setTipBlankTime(System.currentTimeMillis());
-                Log.d(TAG, String.format("序号：%d,位置:%d,提示空白时间：%d",i,results.get(i).getPlace(),results.get(i).getTipBlankTime()));
-
-                sleetTime = new Random().nextInt(config.getActionTimeFloat()) +config.getActionTimeConst();
-                try {
-                    Thread.sleep(sleetTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-                results.get(i).setActionTime(System.currentTimeMillis());
-                Log.d(TAG, String.format("序号：%d,位置:%d,点击时间：%d",i,results.get(i).getPlace(),results.get(i).getActionTime()));
-
-                sleetTime = new Random().nextInt(config.getActionBlankTimeFloat()) +config.getActionBlankTimeConst();
-                try {
-                    Thread.sleep(sleetTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-                results.get(i).setActionBlankTime(System.currentTimeMillis());
-                Log.d(TAG, String.format("序号：%d,位置:%d,点击空白时间：%d",i,results.get(i).getPlace(),results.get(i).getActionBlankTime()));
-            }
-            return results;
-        }
     }
 
 }
