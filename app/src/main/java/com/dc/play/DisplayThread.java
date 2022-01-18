@@ -33,6 +33,7 @@ public class DisplayThread extends Thread {
         for(int i=0;i<config.getColumn()*config.getRow();i++){
             Result result = new Result();
             result.setPlace(i);
+            result.setTester(config.getTester());
             this.results.add(result);
         }
         Collections.shuffle(this.results);
@@ -59,6 +60,7 @@ public class DisplayThread extends Thread {
                 if(config.getTipTimeFloat()>0) sleepms = new Random().nextInt(config.getTipTimeFloat()) + config.getTipTimeConst();
                 else sleepms = config.getTipTimeConst();
                 try {
+                    Log.e(TAG, String.format("tip %s",sleepms));
                     Thread.sleep(sleepms);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -71,6 +73,7 @@ public class DisplayThread extends Thread {
                 if(config.getTipBlankTimeFloat()>0) sleepms = new Random().nextInt(config.getTipBlankTimeFloat()) + config.getTipTimeConst();
                 else sleepms = config.getTipBlankTimeConst();
                 try {
+                    Log.e(TAG, String.format("tip blank %s",sleepms));
                     Thread.sleep(sleepms);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -82,22 +85,14 @@ public class DisplayThread extends Thread {
                 message.what = GameMsg.MSG_GAME_ACTION;
                 message.obj=results.get(index).getPlace();
                 mainHandler.sendMessage(message);
-/*                if(config.getActionTimeFloat()>0) sleepms = new Random().nextInt(config.getActionTimeFloat()) + config.getActionTimeConst();
-                else sleepms = config.getActionTimeConst();
-                try {
-                    Thread.sleep(sleepms);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-                results.get(index).setActionTime(System.currentTimeMillis());*/
 //                wait until action time is set
                 while(results.get(index).getActionTime()==0);
 
                 mainHandler.sendEmptyMessage(GameMsg.MSG_GAME_ACTION_BLANK);
-                if(config.getActionBlankTimeFloat()>0) sleepms = new Random().nextInt(config.getActionBlankTimeFloat()) + config.getActionTimeConst();
-                else sleepms = config.getActionTimeConst();
+                if(config.getActionBlankTimeFloat()>0) sleepms = new Random().nextInt(config.getActionBlankTimeFloat()) + config.getActionBlankTimeConst();
+                else sleepms = config.getActionBlankTimeConst();
                 try {
+                    Log.e(TAG, String.format("action blank %s",sleepms));
                     Thread.sleep(sleepms);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

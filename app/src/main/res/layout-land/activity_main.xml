@@ -7,42 +7,215 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:stretchColumns = "*">
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="人机交互基础数据采集"
+                android:textSize="60sp"
+                android:textColor="@color/blue"
+                android:layout_gravity="center"
+                android:layout_span="4"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Develop by DC Design by HANG"
+                android:textSize="34sp"
+                android:textColor="@color/blue"
+                android:layout_gravity="center"
+                android:layout_span="4"
+                />
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/et_tester_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_span="2"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textSize="34sp"
+                android:hint="姓名"
+                android:textColor="@color/blue"
+                />
+        </TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="人机交互基础数据采集"
-            android:textColor="@color/blue"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.448"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.043" />
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="行数"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+            <EditText
+                android:id="@+id/et_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="3"
+                android:textSize="34sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="列数"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+            <EditText
+                android:id="@+id/et_column"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="8"
+                android:textSize="34sp"
+                />
+        </TableRow>
 
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            tools:layout_editor_absoluteX="417dp"
-            tools:layout_editor_absoluteY="115dp" />
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="提示固定时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
 
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始测试"
-            android:textSize="34sp"
-            tools:layout_editor_absoluteX="287dp"
-            tools:layout_editor_absoluteY="330dp" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/et_tip_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="提示浮动时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+            <EditText
+                android:id="@+id/et_tip_float"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="提示后空白固定时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+
+            <EditText
+                android:id="@+id/et_tip_blank_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="提示后空白浮动时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+            <EditText
+                android:id="@+id/et_tip_blank_float"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="点击后空白固定时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+
+            <EditText
+                android:id="@+id/et_action_blank_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="点击后空白浮动时间[ms]"
+                android:textSize="34sp"
+                android:textAlignment="textEnd"
+                />
+            <EditText
+                android:id="@+id/et_action_blank_float"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:inputType="number"
+                android:text="2000"
+                android:textSize="34sp"
+                />
+        </TableRow>
+
+
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_span="4"
+                android:text="开始测试"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+        </TableRow>
+    </TableLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

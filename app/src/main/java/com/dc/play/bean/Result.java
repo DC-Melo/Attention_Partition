@@ -3,14 +3,25 @@ package com.dc.play.bean;
 import java.io.Serializable;
 
 public class Result  implements Serializable {
-    private int index;
-    private int place;
-    private long beginTime;
-    private long tipTime;
-    private long tipBlankTime;
-    private long actionTime;
-    private long actionBlankTime;
 
+
+
+
+    private String tester;
+    private int index=0;
+    private int place=0;
+    private long beginTime=0;
+    private long tipTime=0;
+    private long tipBlankTime=0;
+    private long actionTime=0;
+    private long actionBlankTime=0;
+
+    public String getTester() {
+        return tester;
+    }
+    public void setTester(String tester) {
+        this.tester = tester;
+    }
     public int getIndex() {
         return index;
     }

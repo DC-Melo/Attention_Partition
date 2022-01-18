@@ -7,19 +7,24 @@
     android:background="@color/background"
     tools:context=".ResultActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="测试结果展示"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="91dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <WebView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/btn_start_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="在来一局"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="315dp" />
+        <Button
+            android:id="@+id/btn_start_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="在来一局"
+            android:textSize="60sp" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

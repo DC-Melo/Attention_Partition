@@ -216,7 +216,7 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <SNR>174_: :=v:count ? v:count : ''
+nnoremap <SNR>158_: :=v:count ? v:count : ''
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
 map <M-p> :call SearchInvalidComment(1)
@@ -912,9 +912,9 @@ set backspace=2
 set cindent
 set cinoptions=g0,:0,N-s,(0
 set cmdheight=2
-set completefunc=youcompleteme#CompleteFunc
 set completeopt=menuone
 set confirm
+set cpoptions=aAceFsB
 set dictionary=/usr/share/dict/words
 set expandtab
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
@@ -937,8 +937,7 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
-set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.class
-set suffixesadd=.java
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set noswapfile
 set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
@@ -962,13 +961,9 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd .
-edit app/src/main/java/com/dc/play/PlayActivity.java
+$argadd testdata.csv
+edit testdata.csv
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
@@ -976,20 +971,9 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 110 + 70) / 141)
-exe 'vert 2resize ' . ((&columns * 30 + 70) / 141)
 argglobal
-balt NERD_tree_1
 let s:cpo_save=&cpo
 set cpo&vim
-imap <buffer> <silent> <C-J>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-imap <buffer> <silent> <C-J>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <buffer> <silent> <C-J>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <buffer> <silent> <C-J>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-imap <buffer> <silent> <C-J>ii <Plug>(JavaComplete-Imports-Add)
-imap <buffer> <silent> <C-J>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <buffer> <silent> <C-J>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <buffer> <silent> <C-J>I <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
 inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
 inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
@@ -1004,25 +988,6 @@ inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
 inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
 inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
 inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
-nmap <buffer> <silent> ,jN <Plug>(JavaComplete-Generate-ClassInFile)
-nmap <buffer> <silent> ,jn <Plug>(JavaComplete-Generate-NewClass)
-vmap <buffer> <silent> ,ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-vmap <buffer> <silent> ,jg <Plug>(JavaComplete-Generate-AccessorGetter)
-vmap <buffer> <silent> ,js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <buffer> <silent> ,jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
-nmap <buffer> <silent> ,jc <Plug>(JavaComplete-Generate-Constructor)
-nmap <buffer> <silent> ,jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
-nmap <buffer> <silent> ,jts <Plug>(JavaComplete-Generate-ToString)
-nmap <buffer> <silent> ,ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-nmap <buffer> <silent> ,jg <Plug>(JavaComplete-Generate-AccessorGetter)
-nmap <buffer> <silent> ,js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <buffer> <silent> ,jA <Plug>(JavaComplete-Generate-Accessors)
-nmap <buffer> <silent> ,jM <Plug>(JavaComplete-Generate-AbstractMethods)
-nmap <buffer> <silent> ,jis <Plug>(JavaComplete-Imports-SortImports)
-nmap <buffer> <silent> ,jii <Plug>(JavaComplete-Imports-Add)
-nmap <buffer> <silent> ,ji <Plug>(JavaComplete-Imports-AddSmart)
-nmap <buffer> <silent> ,jR <Plug>(JavaComplete-Imports-RemoveUnused)
-nmap <buffer> <silent> ,jI <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
 inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
 inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
@@ -1038,14 +1003,6 @@ inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
 noremap <buffer> <silent> <M-n> :call AutoPairsJump()
 noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 inoremap <buffer> <silent>  =AutoPairsDelete()
-imap <buffer> <silent> <NL>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-imap <buffer> <silent> <NL>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <buffer> <silent> <NL>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <buffer> <silent> <NL>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-imap <buffer> <silent> <NL>ii <Plug>(JavaComplete-Imports-Add)
-imap <buffer> <silent> <NL>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <buffer> <silent> <NL>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <buffer> <silent> <NL>I <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent>   =AutoPairsSpace()
 inoremap <buffer> <silent> " =AutoPairsInsert('"')
 inoremap <buffer> <silent> ' =AutoPairsInsert('''')
@@ -1073,192 +1030,6 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=j1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=youcompleteme#CompleteFunc
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal cursorlineopt=both
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'java'
-setlocal filetype=java
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-set nofoldenable
-setlocal nofoldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-setlocal indentexpr=GetJavaIndent()
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,0=extends,0=implements
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal listchars=
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javacomplete#Complete
-setlocal path=.,/usr/include,,
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-set relativenumber
-setlocal relativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal scrolloff=-1
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal showbreak=
-setlocal sidescrolloff=-1
-setlocal signcolumn=auto
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal spelloptions=
-setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.java
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'java'
-setlocal syntax=java
-endif
-setlocal tabstop=4
-setlocal tagcase=
-setlocal tagfunc=
-setlocal tags=
-setlocal termwinkey=
-setlocal termwinscroll=10000
-setlocal termwinsize=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal varsofttabstop=
-setlocal vartabstop=
-setlocal wincolor=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 46 - ((16 * winheight(0) + 17) / 34)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 46
-normal! 0
-wincmd w
-argglobal
-enew
-file __Tagbar__.1
-balt NERD_tree_1
-let s:cpo_save=&cpo
-set cpo&vim
-inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
-inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
-inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
-inoremap <buffer> <silent> <M-e> =AutoPairsFastWrap()
-inoremap <buffer> <silent> <C-H> =AutoPairsDelete()
-inoremap <buffer> <silent> <BS> =AutoPairsDelete()
-inoremap <buffer> <silent> <M-'> =AutoPairsMoveCharacter('''')
-inoremap <buffer> <silent> <M-"> =AutoPairsMoveCharacter('"')
-inoremap <buffer> <silent> <M-}> =AutoPairsMoveCharacter('}')
-inoremap <buffer> <silent> <M-{> =AutoPairsMoveCharacter('{')
-inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
-inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
-inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
-inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
-inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
-inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
-inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
-inoremap <buffer> <silent> ¨ =AutoPairsMoveCharacter('(')
-inoremap <buffer> <silent> î :call AutoPairsJump()a
-inoremap <buffer> <silent> <expr> ð AutoPairsToggle()
-inoremap <buffer> <silent> â =AutoPairsBackInsert()
-inoremap <buffer> <silent> å =AutoPairsFastWrap()
-inoremap <buffer> <silent> ý =AutoPairsMoveCharacter('}')
-inoremap <buffer> <silent> û =AutoPairsMoveCharacter('{')
-inoremap <buffer> <silent> Ý =AutoPairsMoveCharacter(']')
-inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
-noremap <buffer> <silent> <M-n> :call AutoPairsJump()
-noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
-inoremap <buffer> <silent>  =AutoPairsDelete()
-inoremap <buffer> <silent>   =AutoPairsSpace()
-inoremap <buffer> <silent> " =AutoPairsInsert('"')
-inoremap <buffer> <silent> ' =AutoPairsInsert('''')
-inoremap <buffer> <silent> ( =AutoPairsInsert('(')
-inoremap <buffer> <silent> ) =AutoPairsInsert(')')
-noremap <buffer> <silent> î :call AutoPairsJump()
-noremap <buffer> <silent> ð :call AutoPairsToggle()
-inoremap <buffer> <silent> [ =AutoPairsInsert('[')
-inoremap <buffer> <silent> ] =AutoPairsInsert(']')
-inoremap <buffer> <silent> ` =AutoPairsInsert('`')
-inoremap <buffer> <silent> { =AutoPairsInsert('{')
-inoremap <buffer> <silent> } =AutoPairsInsert('}')
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal balloonexpr=TagbarBalloonExpr()
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=hide
-setlocal nobuflisted
-setlocal buftype=nofile
-setlocal cindent
-setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=g0,:0,N-s,(0
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
@@ -1267,7 +1038,7 @@ setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal completefunc=
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
@@ -1281,8 +1052,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'tagbar'
-setlocal filetype=tagbar
+if &filetype != ''
+setlocal filetype=
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -1319,10 +1090,10 @@ setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal nomodifiable
+setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
-setlocal nonumber
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -1331,16 +1102,16 @@ setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
 set relativenumber
-setlocal norelativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
-setlocal scrolloff=0
+setlocal scrolloff=-1
 setlocal shiftwidth=4
 setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
-setlocal signcolumn=no
+setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
@@ -1348,12 +1119,12 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%#airline_a_inactive#\ Tagbar\ %#airline_a_to_airline_b_inactive#%#airline_b_inactive#\ Name\ %#airline_b_to_airline_c_inactive#%#airline_c_inactive#\ PlayActivity.java\ 
-setlocal suffixesadd=.java
+setlocal statusline=%!airline#statusline(1)
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'tagbar'
-setlocal syntax=tagbar
+if &syntax != ''
+setlocal syntax=
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -1370,15 +1141,20 @@ setlocal varsofttabstop=
 setlocal vartabstop=
 setlocal wincolor=
 setlocal nowinfixheight
-setlocal winfixwidth
+setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-wincmd w
-exe 'vert 1resize ' . ((&columns * 110 + 70) / 141)
-exe 'vert 2resize ' . ((&columns * 30 + 70) / 141)
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 8 - ((7 * winheight(0) + 17) / 34)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 8
+normal! 070|
 tabnext 1
-badd +0 app/src/main/java/com/dc/play/PlayActivity.java
+badd +0 testdata.csv
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

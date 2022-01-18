@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +44,8 @@ public class PlayActivity extends AppCompatActivity {
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Result> results = new ArrayList<>();
 
-
-private Handler mainHandler = new Handler() {
+//    设置与子线程通信的handler
+    private Handler mainHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -105,8 +106,10 @@ private Handler mainHandler = new Handler() {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getIntent().getExtras();
+        config = (Config) bundle.getSerializable("CONFIG");
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_play);
-        config = new Config();
         initView();
         randomThread = new DisplayThread(this, mainHandler, config);
         randomThread.start();
@@ -122,6 +125,7 @@ private Handler mainHandler = new Handler() {
 
         btnPause = (Button) findViewById(R.id.btn_pause);
         tipText = (TextView) findViewById(R.id.tip_text);
+//        初始化表格布局
         for(int i=0;i<config.getRow();i++){
             for(int j=0;j<config.getColumn();j++){
                 System.out.println(String.valueOf(i));
@@ -137,11 +141,9 @@ private Handler mainHandler = new Handler() {
                 gridLayout.addView(btn,params);
             }
         }
+//        绑定点击事件，点击后设置点击时间
         for(int i=0;i<buttons.size();i++){
             final int finalI = i;
-/*            results.add(new Result());
-            results.get(i).setPlace(i);*/
-            //buttons.get(i).setVisibility(View.INVISIBLE);
             buttons.get(i).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Do something in response to button click
@@ -151,7 +153,7 @@ private Handler mainHandler = new Handler() {
                 }
             });
         }
-
+//绑定暂停游戏，继续游戏
         btnPause.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(btnPause.getText().toString().equals(getResources().getString(R.string.thread_pause))){

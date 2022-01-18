@@ -1,21 +1,23 @@
 package com.dc.play.bean;
 
 
+import android.text.Editable;
+
 import java.io.Serializable;
 
 public class Config  implements Serializable {
-    private String tester="";
+    private String tester="tester";
     private int testFunction = 0;
     private int row = 3;
     private int column = 3;
-    private int tipTimeConst = 2000;
-    private int tipTimeFloat = 2000;
-    private int tipBlankTimeConst = 2000;
-    private int tipBlankTimeFloat = 2000;
+    private int tipTimeConst = 200;
+    private int tipTimeFloat = 200;
+    private int tipBlankTimeConst = 200;
+    private int tipBlankTimeFloat = 200;
     private int actionTimeConst = 1000;
     private int actionTimeFloat = 1000;
-    private int actionBlankTimeConst = 2000;
-    private int actionBlankTimeFloat = 2000;
+    private int actionBlankTimeConst = 200;
+    private int actionBlankTimeFloat = 200;
 
     public String getTester() {
         return tester;
