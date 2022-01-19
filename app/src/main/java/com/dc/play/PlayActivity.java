@@ -1,7 +1,37 @@
+/*******************************************************************************
+* AUTHOR   : DC-Melo王江
+* MAIL     : melo.da.chor@gmail.com
+* GITHUB   : https://github.com/DC-Melo https://gitee.com/DC-Melo
+* BLOG     : www.dc-melo.com
+* FILE     : PlayActivity.java
+* CREATED  : 2022-01-19 12:26
+* MODIFIED : 2022-01-19 12:26
+* VERSION  : V-0.0.1.220119_a;
+* DESCRIB  : 
+* NOTICES  : 
+*  _____   _____      __  __      _       
+* |  __ \ / ____|    |  \/  |    | |      
+* | |  | | |   ______| \  / | ___| | ___  
+* | |  | | |  |______| |\/| |/ _ \ |/ _ \ 
+* | |__| | |____     | |  | |  __/ | (_) |
+* |_____/ \_____|    |_|  |_|\___|_|\___/ 
+*                                         
+*                                         
+* 
+*  ___   ___ ___  ___      _____  __     ____  ___  
+* |__ \ / _ \__ \|__ \    / / _ \/_ |   / /_ |/ _ \ 
+*    ) | | | | ) |  ) |  / / | | || |  / / | | (_) |
+*   / /| | | |/ /  / /  / /| | | || | / /  | |\__, |
+*  / /_| |_| / /_ / /_ / / | |_| || |/ /   | |  / / 
+* |____|\___/____|____/_/   \___/ |_/_/    |_| /_/  
+*                                                   
+*                                                   
+* 
+********************************************************************************/
+
 package com.dc.play;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +43,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.gridlayout.widget.GridLayout;
-
 import com.dc.play.bean.Config;
 import com.dc.play.bean.GameMsg;
 import com.dc.play.bean.Result;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +57,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
-
 
 public class PlayActivity extends AppCompatActivity {
     private static final String TAG = PlayActivity.class.getSimpleName();
@@ -44,7 +70,7 @@ public class PlayActivity extends AppCompatActivity {
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Result> results = new ArrayList<>();
 
-//    设置与子线程通信的handler
+    // 设置与子线程通信的handler
     private Handler mainHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -111,49 +137,50 @@ public class PlayActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_play);
         initView();
+        // 启动线程控制显示
         randomThread = new DisplayThread(this, mainHandler, config);
         randomThread.start();
     }
 
+    /**
+     * 初始化页面布局 
+     */
     @SuppressLint("ResourceAsColor")
     public void initView(){
+        // 初始化grid布局
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
         gridLayout.setColumnCount(config.getColumn());
         gridLayout.setRowCount(config.getRow());
-        System.out.println("列："+String.valueOf(config.getColumn()));
-        System.out.println("行:"+String.valueOf(config.getRow()));
-
         btnPause = (Button) findViewById(R.id.btn_pause);
         tipText = (TextView) findViewById(R.id.tip_text);
-//        初始化表格布局
+
+        // 初始化表格布局中的按钮
         for(int i=0;i<config.getRow();i++){
             for(int j=0;j<config.getColumn();j++){
-                System.out.println(String.valueOf(i));
-                System.out.println(String.valueOf(j));
+                final int finalI = i;
+                final int finalJ = j;
                 Button btn = new Button(this);
-                btn.setText(String.format("%d,%d",i,j));
+                btn.setText(String.format("(%d,%d)",i,j));
+                //btn.setText(String.format("row=%d column=%d",i,j));
                 btn.setBackgroundColor(R.color.foreground);
-                //btn.setText(String.format("row=%d cloumn=%d",i,j));
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        // Do something in response to button click
+                        Toast toast = Toast.makeText(getApplicationContext(), String.format("点击(%s,%s)",finalI,finalJ), Toast.LENGTH_SHORT);
+                        toast.show();
+                        randomThread.setActionTime();
+                    }
+                });
                 buttons.add(btn);
+                // 添加到grid中
                 GridLayout.Spec rowSpec = GridLayout.spec(i,GridLayout.FILL,1f);
                 GridLayout.Spec columnSpec = GridLayout.spec(j,GridLayout.FILL,1f);
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams(rowSpec,columnSpec);
                 gridLayout.addView(btn,params);
             }
         }
-//        绑定点击事件，点击后设置点击时间
-        for(int i=0;i<buttons.size();i++){
-            final int finalI = i;
-            buttons.get(i).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // Do something in response to button click
-                    Toast toast = Toast.makeText(getApplicationContext(), "点击位置"+String.valueOf(finalI), Toast.LENGTH_SHORT);
-                    toast.show();
-                    randomThread.setActionTime();
-                }
-            });
-        }
-//绑定暂停游戏，继续游戏
+        // 绑定暂停游戏，继续游戏
         btnPause.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(btnPause.getText().toString().equals(getResources().getString(R.string.thread_pause))){
