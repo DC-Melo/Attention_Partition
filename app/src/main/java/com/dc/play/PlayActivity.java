@@ -34,6 +34,7 @@ package com.dc.play;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -75,7 +76,6 @@ public class PlayActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.d(TAG,"控制任务进程 " );
             int what = msg.what;
             switch (what) {
                 case GameMsg.MSG_GAME_END:
@@ -94,6 +94,11 @@ public class PlayActivity extends AppCompatActivity {
                 case GameMsg.MSG_GAME_START:
                     isGameRuning = true;
                     isGamePause = false;
+                    tipText.setVisibility(View.INVISIBLE);
+                    btnPause.setVisibility(View.INVISIBLE);
+                    for(int i=0;i<buttons.size();i++){
+                        buttons.get(i).setVisibility(View.VISIBLE);
+                    }
                     break;
                 case GameMsg.MSG_GAME_START_RUNING:
                     isGamePause = false;
@@ -117,6 +122,9 @@ public class PlayActivity extends AppCompatActivity {
                     break;
                 case GameMsg.MSG_GAME_ACTION:
                     int index = (int) msg.obj;
+                    Log.d(TAG,String.format("显示%s个格子",index) );
+                    buttons.get(index).setBackgroundColor(Color.BLUE);
+                    buttons.get(index).setTextColor(Color.BLUE);
                     buttons.get(index).setVisibility(View.VISIBLE);
                     break;
                 case GameMsg.MSG_GAME_ACTION_BLANK:
@@ -160,15 +168,19 @@ public class PlayActivity extends AppCompatActivity {
                 final int finalI = i;
                 final int finalJ = j;
                 Button btn = new Button(this);
-                btn.setText(String.format("(%d,%d)",i,j));
-                //btn.setText(String.format("row=%d column=%d",i,j));
-                btn.setBackgroundColor(R.color.foreground);
+                //btn.setText(String.format("(%d,%d)",i,j));
+                btn.setMinWidth(1);
+                btn.setMinHeight(1);
+                btn.setMinimumWidth(1);
+                btn.setMinimumHeight(1);
+                btn.setWidth(1920/config.getColumn());
+                btn.setHeight(720/config.getRow());
 
                 btn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         // Do something in response to button click
                         Toast toast = Toast.makeText(getApplicationContext(), String.format("点击(%s,%s)",finalI,finalJ), Toast.LENGTH_SHORT);
-                        toast.show();
+                        //toast.show();
                         randomThread.setActionTime();
                     }
                 });
@@ -186,13 +198,13 @@ public class PlayActivity extends AppCompatActivity {
                 if(btnPause.getText().toString().equals(getResources().getString(R.string.thread_pause))){
                     randomThread.setThreadPause();
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.thread_pause, Toast.LENGTH_SHORT);
-                    toast.show();
+                    //toast.show();
                     btnPause.setText(R.string.thread_resume);
                 }else{
                     randomThread.setThreadResume();
                     // Do something in response to button click
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.thread_resume, Toast.LENGTH_SHORT);
-                    toast.show();
+                    //toast.show();
                     btnPause.setText(R.string.thread_pause);
                 }
 

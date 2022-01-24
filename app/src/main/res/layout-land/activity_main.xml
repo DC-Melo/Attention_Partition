@@ -212,10 +212,9 @@
                 android:text="开始测试"
                 android:textColor="@color/white"
                 android:textSize="60sp" />
+
         </TableRow>
     </TableLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         etTipBlankFloat    = (EditText) findViewById(R.id.et_tip_blank_float)    ;
         etActionBlankConst = (EditText) findViewById(R.id.et_action_blank_const) ;
         etActionBlankFloat = (EditText) findViewById(R.id.et_action_blank_float) ;
-        btStart     = (Button) findViewById(R.id.btn_start)               ;
+        btStart     = (Button) findViewById(R.id.btn_start)                      ;
+
 
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override

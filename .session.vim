@@ -216,7 +216,7 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <SNR>168_: :=v:count ? v:count : ''
+nnoremap <SNR>160_: :=v:count ? v:count : ''
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
 map <M-p> :call SearchInvalidComment(1)
@@ -939,8 +939,7 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
-set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.class
-set suffixesadd=.java
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set noswapfile
 set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
@@ -964,8 +963,9 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd .
-edit app/src/main/java/com/dc/play/PlayActivity.java
+$argadd .git/config
+$argadd Attention_Partition/.git/config
+edit .git/config
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -975,17 +975,9 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt app/src/main/res/layout-land/activity_play.xml
+balt Attention_Partition/.git/config
 let s:cpo_save=&cpo
 set cpo&vim
-imap <buffer> <silent> <C-J>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-imap <buffer> <silent> <C-J>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <buffer> <silent> <C-J>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <buffer> <silent> <C-J>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-imap <buffer> <silent> <C-J>ii <Plug>(JavaComplete-Imports-Add)
-imap <buffer> <silent> <C-J>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <buffer> <silent> <C-J>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <buffer> <silent> <C-J>I <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
 inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
 inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
@@ -1000,25 +992,6 @@ inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
 inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
 inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
 inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
-nmap <buffer> <silent> ,jN <Plug>(JavaComplete-Generate-ClassInFile)
-nmap <buffer> <silent> ,jn <Plug>(JavaComplete-Generate-NewClass)
-vmap <buffer> <silent> ,ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-vmap <buffer> <silent> ,jg <Plug>(JavaComplete-Generate-AccessorGetter)
-vmap <buffer> <silent> ,js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <buffer> <silent> ,jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
-nmap <buffer> <silent> ,jc <Plug>(JavaComplete-Generate-Constructor)
-nmap <buffer> <silent> ,jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
-nmap <buffer> <silent> ,jts <Plug>(JavaComplete-Generate-ToString)
-nmap <buffer> <silent> ,ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-nmap <buffer> <silent> ,jg <Plug>(JavaComplete-Generate-AccessorGetter)
-nmap <buffer> <silent> ,js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <buffer> <silent> ,jA <Plug>(JavaComplete-Generate-Accessors)
-nmap <buffer> <silent> ,jM <Plug>(JavaComplete-Generate-AbstractMethods)
-nmap <buffer> <silent> ,jis <Plug>(JavaComplete-Imports-SortImports)
-nmap <buffer> <silent> ,jii <Plug>(JavaComplete-Imports-Add)
-nmap <buffer> <silent> ,ji <Plug>(JavaComplete-Imports-AddSmart)
-nmap <buffer> <silent> ,jR <Plug>(JavaComplete-Imports-RemoveUnused)
-nmap <buffer> <silent> ,jI <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
 inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
 inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
@@ -1034,14 +1007,6 @@ inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
 noremap <buffer> <silent> <M-n> :call AutoPairsJump()
 noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 inoremap <buffer> <silent>  =AutoPairsDelete()
-imap <buffer> <silent> <NL>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-imap <buffer> <silent> <NL>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <buffer> <silent> <NL>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <buffer> <silent> <NL>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-imap <buffer> <silent> <NL>ii <Plug>(JavaComplete-Imports-Add)
-imap <buffer> <silent> <NL>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <buffer> <silent> <NL>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <buffer> <silent> <NL>I <Plug>(JavaComplete-Imports-AddMissing)
 inoremap <buffer> <silent>   =AutoPairsSpace()
 inoremap <buffer> <silent> " =AutoPairsInsert('"')
 inoremap <buffer> <silent> ' =AutoPairsInsert('''')
@@ -1069,11 +1034,11 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=j1
+setlocal cinoptions=g0,:0,N-s,(0
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=//%s
+setlocal comments=:#,:;
+setlocal commentstring=;\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -1091,8 +1056,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'java'
-setlocal filetype=java
+if &filetype != 'gitconfig'
+setlocal filetype=gitconfig
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -1114,9 +1079,9 @@ setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
-setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-setlocal indentexpr=GetJavaIndent()
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,0=extends,0=implements
+setlocal includeexpr=
+setlocal indentexpr=GetGitconfigIndent()
+setlocal indentkeys=o,O,*<Return>,0[,],0;,0#,=,!^F
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -1134,7 +1099,7 @@ setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=javacomplete#Complete
+setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -1158,12 +1123,12 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(2)
-setlocal suffixesadd=.java
+setlocal statusline=%!airline#statusline(1)
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'java'
-setlocal syntax=java
+if &syntax != 'gitconfig'
+setlocal syntax=gitconfig
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -1186,15 +1151,16 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 187 - ((16 * winheight(0) + 17) / 34)
+let s:l = 24 - ((23 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 187
-normal! 0
+keepjumps 24
+normal! 05|
 tabnext 1
-badd +42 app/src/main/res/layout-land/activity_play.xml
-badd +0 app/src/main/java/com/dc/play/PlayActivity.java
+badd +10 .git/config
+badd +7 Attention_Partition/.git/config
+badd +380 ~/.vimrc.custom.config
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -1206,7 +1172,6 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

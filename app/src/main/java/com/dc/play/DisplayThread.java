@@ -51,7 +51,15 @@ public class DisplayThread extends Thread {
     @Override
     public void run() {
         super.run();
-        int sleepms;
+        mainHandler.sendEmptyMessage(GameMsg.MSG_GAME_START);
+        int sleepms = config.getTipTimeConst()*2;
+        try {
+            Log.e(TAG, String.format("begin %s",sleepms));
+            Thread.sleep(sleepms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
+        }
         while(index < config.getRow()*config.getColumn()){
 
                 if (index >= config.getRow()*config.getColumn()) break;
