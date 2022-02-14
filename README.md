@@ -1,6 +1,6 @@
-# DC Attention Partition Rearch
+# DC 注意力分区研究Attention Partition Rearch 
 
-<!-- 项目徽章 -->
+<!-- 项目标记 -->
 ![author](https://img.shields.io/badge/DC-Melo-brightgreen.svg) 
 ![platform](https://img.shields.io/badge/platform-Android-yellow.svg) 
 ![language](https://img.shields.io/badge/language-java-blue.svg) 
@@ -22,7 +22,7 @@ This repository contains:
 Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
 
 <!-- 项目目录 -->
-## Table of Contents
+## 项目目录Table of Contents 
 
 - [Background](#background)
 - [Install](#install)
@@ -36,7 +36,7 @@ Standard Readme is designed for open source libraries. Although it’s [historic
 - [License](#license)
 
 <!-- 项目背景 -->
-## Background
+## 项目背景Background
 
 Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
 
@@ -63,7 +63,7 @@ The goals for this repository are:
 5. A **compliant badge** for users. See [the badge](#badge).
 
 <!-- 编译安装 -->
-## Install
+## 编译安装Install
 
 1. Enviroment
 ```sh
@@ -109,7 +109,7 @@ $ npm install --global standard-readme-spec
 ```
 
 <!-- 使用说明 -->
-## Usage
+## 使用说明Usage
 
 This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
@@ -119,12 +119,12 @@ $ standard-readme-spec
 ```
 
 <!-- 项目负责人 -->
-### Generator
+### 项目负责人Generator
 
 To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
 
 <!-- 参与贡献 -->
-## Badge
+## 参与贡献Badge
 [![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
 [![Coverage Status](https://coveralls.io/repos/github/yeungeek/monkey-android/badge.svg?branch=master)](https://coveralls.io/github/yeungeek/monkey-android?branch=master)
 
@@ -143,38 +143,38 @@ To add in Markdown format, use this code:
 To see how the specification has been applied, see the [example-readmes](example-readmes/).
 
 <!-- 相关项目 -->
-## Related Efforts
+## 相关项目Related Efforts
 
 - [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
 - [open-source-template](https://github.com/davidbgk/open-source-template/) - A README template to encourage open-source contributions.
 
 <!-- 项目负责人 -->
-## Maintainers
+## 项目负责人Maintainers
 
 [@DC-Melo](https://github.com/DC-Melo)
 [@DC-Melo](https://gitee.com/DC-Melo)
 
 <!-- 相关项目 -->
-## Contributing
+## 相关项目Contributing
 
 Feel free to dive in! [Open an issue](https://github.com/DC-Melo/standard-readme/issues/new) or submit PRs.
 
 Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
 <!-- 参与贡献 -->
-### Contributors
+### 参与贡献Contributors
 
 This project exists thanks to all the people who contribute. 
 <a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
 
 
 <!-- 开源协议 -->
-## License
+## 开源协议License
 
 [MIT](LICENSE) © DC-Melo王江
 
 <!-- 捐赠 -->
-## Donation
+## 请为我点赞Donation
 
 如果你喜欢我的项目，请在对应的项目右上角 "Star" 一下。你的支持是我最大的鼓励！ ^^ 你也还可以扫描下面的二维码，对作者进行打赏。
 
