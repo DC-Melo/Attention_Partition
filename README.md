@@ -1,9 +1,10 @@
 # DC Attention Partition Rearch
 
 
-![platform](https://img.shields.io/badge/platform-Android-brightgreen.svg) 
-![language](https://img.shields.io/badge/language-java-yellow.svg) 
-![licence](https://img.shields.io/badge/license-MIT--2.0-blue.svg)
+![author](https://img.shields.io/badge/DC-Melo-brightgreen.svg) 
+![platform](https://img.shields.io/badge/platform-Android-yellow.svg) 
+![language](https://img.shields.io/badge/language-java-blue.svg) 
+![licence](https://img.shields.io/badge/license-MIT--2.0-red.svg)
 
 A standard style for README files
 
