@@ -1,6 +1,6 @@
 # DC Attention Partition Rearch
 
-
+<!-- 徽章 -->
 ![author](https://img.shields.io/badge/DC-Melo-brightgreen.svg) 
 ![platform](https://img.shields.io/badge/platform-Android-yellow.svg) 
 ![language](https://img.shields.io/badge/language-java-blue.svg) 
@@ -9,35 +9,6 @@
 A standard style for README files
 
 Your README file is normally the first entry point to your code. It should tell people why they should use your module, how they can install it, and how they can use it. Standardizing how you write your README makes creating and maintaining your READMEs easier. Great documentation takes work!
-```mermaid
-gantt
-       dateFormat  YYYY-MM-DD
-       title Adding GANTT diagram functionality to mermaid
-
-       section A section
-       Completed task            :done,    des1, 2014-01-06,2014-01-08
-       Active task               :active,  des2, 2014-01-09, 3d
-       Future task               :         des3, after des2, 5d
-       Future task2              :         des4, after des3, 5d
-
-       section Critical tasks
-       Completed task in the critical line :crit, done, 2014-01-06,24h
-       Implement parser and jison          :crit, done, after des1, 2d
-       Create tests for parser             :crit, active, 3d
-       Future task in critical line        :crit, 5d
-       Create tests for renderer           :2d
-       Add to mermaid                      :1d
-
-       section Documentation
-       Describe gantt syntax               :active, a1, after des1, 3d
-       Add gantt diagram to demo page      :after a1  , 20h
-       Add another diagram to demo page    :doc1, after a1  , 48h
-
-       section Last section
-       Describe gantt syntax               :after doc1, 3d
-       Add gantt diagram to demo page      :20h
-       Add another diagram to demo page    :48h
-```
 
 This repository contains:
 
@@ -49,20 +20,6 @@ This repository contains:
 
 Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
 
-```mermaid
-graph LR
-    start[开始] --> input[输入A,B,C]
-    input --> conditionA{A是否大于B}
-    conditionA --> |YES|conditionC{A是否大于C}
-    conditionA -- NO --> conditionB{B是否大于C}
-    conditionC -- YES --> printA[输出A]
-    conditionC -- NO --> printC[输出C]
-    conditionB -- YES --> printB[输出B]
-    conditionB -- NO --> printC[输出C]
-    printA --> stop[结束]
-    printC --> stop
-    printB --> stop
-```
 
 ## Table of Contents
 
@@ -103,35 +60,6 @@ The goals for this repository are:
 4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
 5. A **compliant badge** for users. See [the badge](#badge).
 
-```mermaid
-graph LR
-    start[开始] --> input[输入A,B,C]
-    input --> conditionA{A是否大于B}
-    conditionA -- YES --> conditionC{A是否大于C}
-    conditionA -- NO --> conditionB{B是否大于C}
-    conditionC -- YES --> printA[输出A]
-    conditionC -- NO --> printC[输出C]
-    conditionB -- YES --> printB[输出B]
-    conditionB -- NO --> printC[输出C]
-    printA --> stop[结束]
-    printC --> stop
-    printB --> stop
-```
-```mermaid
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John:hello John
-    loop healthcheck
-        John-->>John:fight against
-    end
-    Note right of John:rational
-
-    John->>Alice:great!
-    John->>Bob:how about you
-    Bob->>John:good!
-
-```
 ## Install
 
 1. Enviroment
