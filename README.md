@@ -7,6 +7,8 @@
 ![licence](https://img.shields.io/badge/license-MIT--2.0-red.svg)
 
 <!-- 项目前言 -->
+在任何场景下，产品的设计和研发的目的都是“为人所用”。而要保证产品的可用易用、好用爱用，首先要了解人机交互的基础规律。例如本项目中，我们通过apk测试用户在车机屏幕上点击的便利程度分布规律 。
+
 
 <!-- 项目目录 -->
 ## 项目目录Table of Contents 
@@ -15,6 +17,7 @@
 - [软件架构Environment](#软件架构Environment)
 - [编译安装Install](#编译安装Install)
 - [使用说明Usage](#使用说明Usage)
+- [后续工作TODO](#后续工作TODO)
 - [项目负责人Maintainers](#项目负责人Maintainers)
 - [参与贡献Contributing](#参与贡献Contributing)
 - [相关项目Related](#相关项目Related)
@@ -25,10 +28,46 @@
 <!-- 项目背景 -->
 ## 项目背景Background
 
+从业务而言，梧桐开展底层的人因研究，对每款车机进行注意、操作分区的测试，将量化结果输出给产研团队，可有效赋能项目定制，实现“设计有据可依，产品科学好用”。
+从行业而言，华为、百度近两年均开始建立车联相关人因研究，并尝试制定行业标准（例如：华为人因制定了车联网字体字号标准）。开展基于心理学科研的人因研究并应用于产研，会提高梧桐产品的科技感和竞争力。
 
 <!-- 软件架构 -->
 ## 软件架构Environment
 
+
+  +--------------------+                +--------------------+
+  |                    |                |                    |
+  |   Android          |                |      Activity      |
+  |                    +--------------->|                    |
+  |   Manifest         |                |        Main        |
+  |                    |                |  user input config |
+  +--------------------+                +---------+----------+
+                                                  |       
+                                                  |bundle(config)
+                                                  |intent          
+                                                  |                
+                                                  v                
+                                        +--------------------+   start thread    +--------------------+
+                                        |                    |------------------>|                    |
+                                        |     Activity       |<------------------|       Thread       |
+                                        |                    |   view update     |       update       |
+                                        |       Play         |                   |        view        |
+                                        |                    |   send click      |                    |
+                                        |  create button     |------------------>|                    |
+                                        |  as configuration  |<----------------- |                    |
+                                        +---------+----------+    test date      +--------------------+
+                                                  |                             
+                                                  |bundle(testdata)          
+                                                  |intent          
+                                                  |                
+                                                  v                
+                                        +---------------------+
+                                        |                     |
+                                        |      Activity       |
+                                        |                     |
+                                        |       Result        |
+                                        |    dispaly result   |
+                                        +---------------------+
 
 <!-- 编译安装 -->
 ## 编译安装Install
@@ -37,6 +76,12 @@
 <!-- 使用说明 -->
 ## 使用说明Usage
 
+
+<!-- 使用说明 -->
+## 后续工作TODO
+
+1. 后续可能需要做滑动按钮，只需要将button更改为滑动按钮即可。
+2. 后续的注意力测试按钮,只需要将整个gridlayout做成可点击的即可。
 
 <!-- 项目负责人 -->
 ## 项目负责人Maintainers
@@ -76,54 +121,3 @@ If you like my project, "Star" in the corresponding project right corner, please
 
 If you comment on the name in the donation message, it will be recorded in the list. ~If you are also an open source author of github, you can leave the GitHub project address or personal home page address when donating. Links will be added to the list to promote each other.
 捐赠列表(Donation list)
-
-## 设计背景：
-在任何场景下，产品的设计和研发的目的都是“为人所用”。而要保证产品的可用易用、好用爱用，首先要了解人机交互的基础规律。例如本项目中，我们通过apk测试用户在车机屏幕上点击的便利程度分布规律 。
-
-从业务而言，梧桐开展底层的人因研究，对每款车机进行注意、操作分区的测试，将量化结果输出给产研团队，可有效赋能项目定制，实现“设计有据可依，产品科学好用”。
-
-从行业而言，华为、百度近两年均开始建立车联相关人因研究，并尝试制定行业标准（例如：华为人因制定了车联网字体字号标准）。开展基于心理学科研的人因研究并应用于产研，会提高梧桐产品的科技感和竞争力。
-
-## 应用架构设计：
-
-  +--------------------+                +--------------------+
-  |                    |                |                    |
-  |   Android          |                |      Activity      |
-  |                    +--------------->|                    |
-  |   Manifest         |                |        Main        |
-  |                    |                |  user input config |
-  +--------------------+                +---------+----------+
-                                                  |       
-                                                  |bundle(config)
-                                                  |intent          
-                                                  |                
-                                                  v                
-                                        +--------------------+   start thread    +--------------------+
-                                        |                    |------------------>|                    |
-                                        |     Activity       |<------------------|       Thread       |
-                                        |                    |   view update     |       update       |
-                                        |       Play         |                   |        view        |
-                                        |                    |   send click      |                    |
-                                        |  create button     |------------------>|                    |
-                                        |  as configuration  |<----------------- |                    |
-                                        +---------+----------+    test date      +--------------------+
-                                                  |                             
-                                                  |bundle(testdata)          
-                                                  |intent          
-                                                  |                
-                                                  v                
-                                        +---------------------+
-                                        |                     |
-                                        |      Activity       |
-                                        |                     |
-                                        |       Result        |
-                                        |    dispaly result   |
-                                        +---------------------+
-## 后续工作
-1. 后续可能需要做滑动按钮，只需要将button更改为滑动按钮即可。
-2. 后续的注意力测试按钮,只需要将整个gridlayout做成可点击的即可。
-
-## Controbute
-
-
-
