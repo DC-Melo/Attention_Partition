@@ -11,8 +11,8 @@
 <!-- 项目目录 -->
 ## 项目目录Table of Contents 
 
-- [Background](#项目背景Background)
-- [Enviroment](#enviroment)
+- [项目背景Background](#项目背景Background)
+- [软件架构Environment](#软件架构Environment)
 - [Install](#install)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
@@ -26,7 +26,7 @@
 
 
 <!-- 软件架构 -->
-## 软件架构Eviroment
+## 软件架构Environment
 
 
 <!-- 编译安装 -->
