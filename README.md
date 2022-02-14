@@ -17,7 +17,7 @@
 - [使用说明Usage](#使用说明Usage)
 - [项目负责人Maintainers](#项目负责人Maintainers)
 - [参与贡献Contributing](#参与贡献Contributing)
-- [相关项目Related Efforts](#相关项目Related Efforts)
+- [相关项目Related_Efforts](#相关项目Related_Efforts)
 - [开源协议License](#开源协议License)
 - [请为我点赞Donation](#请为我点赞Donation)
 
@@ -49,7 +49,7 @@
 
 
 <!-- 相关项目 -->
-## 相关项目Related Efforts
+## 相关项目Related_Efforts
 
 - [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
 
