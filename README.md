@@ -13,12 +13,13 @@
 
 - [项目背景Background](#项目背景Background)
 - [软件架构Environment](#软件架构Environment)
-- [Install](#install)
-- [Usage](#usage)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [Related Efforts](#related-efforts)
-- [License](#license)
+- [编译安装Install](#编译安装Install)
+- [使用说明Usage](#使用说明Usage)
+- [项目负责人Maintainers](#项目负责人Maintainers)
+- [参与贡献Contributing](#参与贡献Contributing)
+- [相关项目Related Efforts](#相关项目Related Efforts)
+- [开源协议License](#开源协议License)
+- [请为我点赞Donation](#请为我点赞Donation)
 
 
 <!-- 项目背景 -->
@@ -30,7 +31,11 @@
 
 
 <!-- 编译安装 -->
-## 编译安装Usage
+## 编译安装Install
+
+
+<!-- 使用说明 -->
+## 使用说明Usage
 
 
 <!-- 项目负责人 -->
@@ -40,14 +45,13 @@
 [@DC-Melo](https://gitee.com/DC-Melo)
 
 <!-- 参与贡献 -->
-## 相关项目Contributing
+## 参与贡献Contributing
 
 
 <!-- 相关项目 -->
 ## 相关项目Related Efforts
 
 - [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
-- [open-source-template](https://github.com/davidbgk/open-source-template/) - A README template to encourage open-source contributions.
 
 
 <!-- 开源协议 -->
