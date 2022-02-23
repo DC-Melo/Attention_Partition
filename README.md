@@ -33,41 +33,41 @@
 
 <!-- 软件架构 -->
 ## 软件架构Environment
-
-
-  +--------------------+                +--------------------+
-  |                    |                |                    |
-  |   Android          |                |      Activity      |
-  |                    +--------------->|                    |
-  |   Manifest         |                |        Main        |
-  |                    |                |  user input config |
-  +--------------------+                +---------+----------+
-                                                  |       
-                                                  |bundle(config)
-                                                  |intent          
-                                                  |                
-                                                  v                
-                                        +--------------------+   start thread    +--------------------+
-                                        |                    |------------------>|                    |
-                                        |     Activity       |<------------------|       Thread       |
-                                        |                    |   view update     |       update       |
-                                        |       Play         |                   |        view        |
-                                        |                    |   send click      |                    |
-                                        |  create button     |------------------>|                    |
-                                        |  as configuration  |<----------------- |                    |
-                                        +---------+----------+    test date      +--------------------+
-                                                  |                             
-                                                  |bundle(testdata)          
-                                                  |intent          
-                                                  |                
-                                                  v                
-                                        +---------------------+
-                                        |                     |
-                                        |      Activity       |
-                                        |                     |
-                                        |       Result        |
-                                        |    dispaly result   |
-                                        +---------------------+
+```
+  +--------------------+           +--------------------+
+  |                    |           |                    |
+  |   Android          |           |      Activity      |
+  |                    +---------->|                    |
+  |   Manifest         |           |        Main        |
+  |                    |           |  user input config |
+  +--------------------+           +---------+----------+
+                                             |       
+                                             |bundle(config)
+                                             |intent          
+                                             |                
+                                             v                
+                                   +--------------------+   start thread    +--------------------+
+                                   |                    |------------------>|                    |
+                                   |     Activity       |<------------------|       Thread       |
+                                   |                    |   view update     |       update       |
+                                   |       Play         |                   |        view        |
+                                   |                    |   send click      |                    |
+                                   |  create button     |------------------>|                    |
+                                   |  as configuration  |<----------------- |                    |
+                                   +---------+----------+    test date      +--------------------+
+                                             |                             
+                                             |bundle(testdata)          
+                                             |intent          
+                                             |                
+                                             v                
+                                   +---------------------+
+                                   |                     |
+                                   |      Activity       |
+                                   |                     |
+                                   |       Result        |
+                                   |    dispaly result   |
+                                   +---------------------+
+```
 
 <!-- 编译安装 -->
 ## 编译安装Install
@@ -121,3 +121,6 @@ If you like my project, "Star" in the corresponding project right corner, please
 
 If you comment on the name in the donation message, it will be recorded in the list. ~If you are also an open source author of github, you can leave the GitHub project address or personal home page address when donating. Links will be added to the list to promote each other.
 捐赠列表(Donation list)
+
+
+
